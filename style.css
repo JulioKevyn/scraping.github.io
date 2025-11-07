@@ -60,6 +60,7 @@ html {
 .nav-links {
     display: flex;
     list-style: none;
+    align-items: center;
 }
 
 .nav-links li {
@@ -77,7 +78,7 @@ html {
     color: var(--accent-blue);
 }
 
-.nav-cta {
+.nav-cta a {
     background: var(--accent-blue);
     color: #fff;
     padding: 0.5rem 1rem;
@@ -85,11 +86,38 @@ html {
     font-weight: 600;
     transition: all 0.3s ease;
 }
-
-.nav-cta:hover {
+.nav-cta a:hover {
     color: #fff;
     transform: scale(1.05);
     box-shadow: 0 0 15px var(--accent-glow);
+}
+
+/* Botão de Download na Navbar */
+.nav-cta-download a {
+    background: transparent;
+    border: 2px solid var(--accent-blue);
+    color: var(--accent-blue);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+.nav-cta-download a:hover {
+    background: var(--accent-blue);
+    color: #fff;
+}
+
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+}
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+    background-color: var(--text-light);
 }
 
 
@@ -119,6 +147,22 @@ html {
     color: #fff;
 }
 
+/* Efeito de Digitação */
+#typing-effect {
+    color: var(--accent-blue);
+    position: relative;
+}
+#typing-effect::after {
+    content: '|';
+    position: absolute;
+    right: -10px;
+    animation: blink 0.7s infinite;
+}
+@keyframes blink {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
 .hero-text p {
     font-size: 1.1rem;
     margin-bottom: 2rem;
@@ -136,18 +180,15 @@ html {
     border-radius: 8px;
     transition: all 0.3s ease;
 }
-
 .cta-button:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(0, 191, 255, 0.3);
 }
-
 .cta-button.outline {
     background: transparent;
     border: 2px solid var(--accent-blue);
     color: var(--accent-blue);
 }
-
 .cta-button.outline:hover {
     background: var(--accent-blue);
     color: #fff;
@@ -157,15 +198,16 @@ html {
     flex: 1;
     text-align: center;
     animation: float 6s ease-in-out infinite;
+    margin-left: 2rem;
 }
-
 .hero-image img {
     max-width: 100%;
     height: auto;
     border-radius: 10px;
+    object-fit: contain;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
 }
 
-/* Animação flutuante */
 @keyframes float {
     0% { transform: translateY(0px); }
     50% { transform: translateY(-20px); }
@@ -173,10 +215,9 @@ html {
 }
 
 /* --- Seções Padrão --- */
-.features-section, .how-it-works-section, .pricing-section {
+.features-section, .how-it-works-section, .pricing-section, .download-section {
     padding: 80px 0;
 }
-
 .section-title {
     font-size: 2.5rem;
     font-weight: 600;
@@ -191,7 +232,6 @@ html {
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
 }
-
 .feature-card {
     background: var(--bg-light);
     border: 1px solid var(--border-color);
@@ -201,24 +241,21 @@ html {
     transition: all 0.3s ease;
     backdrop-filter: blur(5px);
 }
-
 .feature-card:hover {
     transform: translateY(-10px);
     border-color: var(--accent-blue);
     box-shadow: 0 0 25px var(--accent-glow);
 }
-
 .feature-icon {
-    max-width: 80px; /* Ajuste o tamanho dos ícones */
-    height: auto;
+    max-width: 80px;
+    height: 80px;
+    object-fit: contain;
     margin-bottom: 1.5rem;
 }
-
 .feature-card h3 {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
 }
-
 .feature-card p {
     color: var(--text-dark);
 }
@@ -227,19 +264,16 @@ html {
 .how-it-works-section {
     background: var(--bg-light);
 }
-
 .steps-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
 }
-
 .step-card {
     text-align: center;
     padding: 1rem;
     position: relative;
 }
-
 .step-number {
     font-size: 3rem;
     font-weight: 700;
@@ -250,21 +284,20 @@ html {
     left: 10px;
     z-index: 1;
 }
-
 .step-icon {
     max-width: 60px;
+    height: 60px;
+    object-fit: contain;
     margin-bottom: 1rem;
     position: relative;
     z-index: 2;
 }
-
 .step-card h3 {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
     position: relative;
     z-index: 2;
 }
-
 .step-card p {
     color: var(--text-dark);
     position: relative;
@@ -278,7 +311,6 @@ html {
     gap: 2rem;
     align-items: center;
 }
-
 .pricing-card {
     background: var(--bg-light);
     border: 1px solid var(--border-color);
@@ -287,46 +319,38 @@ html {
     text-align: center;
     transition: all 0.3s ease;
 }
-
 .pricing-card:hover {
     transform: scale(1.05);
 }
-
 .pricing-card h3 {
     font-size: 1.3rem;
     font-weight: 600;
     margin-bottom: 1rem;
     color: var(--accent-blue);
 }
-
 .pricing-card .price {
     font-size: 2.5rem;
     font-weight: 700;
     color: #fff;
     margin-bottom: 1.5rem;
 }
-
 .pricing-card .price span {
     font-size: 1rem;
     font-weight: 300;
     color: var(--text-dark);
 }
-
 .pricing-card ul {
     list-style: none;
     margin-bottom: 2rem;
     text-align: left;
 }
-
 .pricing-card ul li {
     margin-bottom: 0.8rem;
     color: var(--text-light);
 }
-
 .check-icon { color: #2ecc71; margin-right: 0.5rem; }
 .cross-icon { color: #e74c3c; margin-right: 0.5rem; }
 
-/* Cartão Recomendado */
 .pricing-card.recommended {
     border-width: 3px;
     border-color: var(--accent-blue);
@@ -334,7 +358,6 @@ html {
     position: relative;
     box-shadow: 0 0 30px var(--accent-glow);
 }
-
 .recommended-badge {
     position: absolute;
     top: -15px;
@@ -347,54 +370,118 @@ html {
     font-size: 0.9rem;
     font-weight: 600;
 }
-
 .pricing-note {
     text-align: center;
     margin-top: 2rem;
     color: var(--text-dark);
 }
 
-/* --- 6. Rodapé --- */
+/* --- 6. NOVA Seção de Download --- */
+.download-section {
+    background: var(--bg-light);
+}
+.download-card {
+    background: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 3rem;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.download-card h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+.download-card p {
+    color: var(--text-dark);
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+.download-note {
+    font-size: 0.9rem !important;
+    color: var(--text-dark) !important;
+    margin-top: 1.5rem;
+    margin-bottom: 0 !important;
+}
+
+/* --- 7. Rodapé --- */
 footer {
     border-top: 1px solid var(--border-color);
     padding: 2rem 0;
     text-align: center;
     margin-top: 50px;
 }
-
 .footer-link {
     color: var(--accent-blue); /* Sua cor especial */
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s ease;
 }
-
 .footer-link:hover {
     text-decoration: underline;
     opacity: 0.8;
 }
 
-/* --- 7. Animação de Scroll (Fade-in) --- */
+/* --- 8. Animação de Scroll (Fade-in) --- */
 .animate-on-scroll {
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
-
 .animate-on-scroll.is-visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* --- Responsividade (Celular) --- */
+/* --- 9. Responsividade (Celular) --- */
 @media (max-width: 768px) {
-    .nav-links { display: none; } /* Simplificado, mas funciona */
-    .hero-content { flex-direction: column; text-align: center; }
+    .hero-content { 
+        flex-direction: column; 
+        text-align: center; 
+    }
     .hero-text { margin-bottom: 3rem; }
     .hero-text h1 { font-size: 2.5rem; }
+    .hero-image { margin-left: 0; }
+    
     .features-grid { grid-template-columns: 1fr; }
     .steps-grid { grid-template-columns: 1fr; }
     .pricing-grid { grid-template-columns: 1fr; }
     .pricing-card.recommended { transform: scale(1); }
     .pricing-card { margin-bottom: 1.5rem; }
+    
+    /* Menu Hamburger */
+    .menu-toggle {
+        display: block;
+        z-index: 101;
+    }
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Começa escondido */
+        width: 70%;
+        height: 100vh;
+        background: var(--bg-light);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: right 0.3s ease-in-out;
+        border-left: 1px solid var(--border-color);
+    }
+    .nav-links.active {
+        right: 0; /* Aparece */
+    }
+    .nav-links li {
+        margin: 1.5rem 0;
+    }
+    .menu-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    .menu-toggle.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .menu-toggle.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
 }
